@@ -1,0 +1,30 @@
+#**************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    game_mkfile                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: seunlee2 <seunlee2@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/15 17:00:09 by seunlee2          #+#    #+#              #
+#    Updated: 2023/12/17 12:33:04 by wooseoki         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+GAME_DIR = src/game
+GAME_SRC =	game_loop.c \
+			img.c \
+			init.c \
+			key_event.c \
+			key_hook.c \
+			key_hook_util.c \
+			raycasting_util.c \
+			raycasting.c \
+			error.c \
+					
+GAME_OBJ_DIR	= obj/game
+GAME_OBJ		= $(GAME_SRC:.c=.o)
+GAME_OBJS	= $(addprefix $(GAME_OBJ_DIR)/, $(GAME_OBJ))
+GAME_SRCS	= $(addprefix $(GAME_DIR)/, $(GAME_SRC))
+
+$(GAME_OBJ_DIR)/%.o : $(GAME_DIR)/%.c
+	@$(CC) -c $(CFLAGS) $< -o $@ $(CPPFLAGS)
