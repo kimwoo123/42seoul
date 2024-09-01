@@ -1,8 +1,11 @@
 ## Common Circle
 
 C with norimenette formatter
+
 C++ with C++98 and not use namespace
+
 every module use Makefile to compile
+
 without external libraries
 
 | Project                                | Language | Topics                                          |
