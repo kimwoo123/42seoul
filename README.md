@@ -1,8 +1,13 @@
 ## Common Circle
 
+C with norimenette formatter
+C++ with C++98 and not use namespace
+every module use Makefile to compile
+without external libraries
+
 | Project                                | Language | Topics                                           |
 | :------------------------------------- | :------: | :----------------------------------------------- |
-| [**Libft**](./libft)                   |    C     | `library` `linked list`                          |
+| [**libft**](./libft)                   |    C     | `library` `linked list`                          |
 | [**read-line**](./read-line)       |    C     | `static variable` `file descriptor`              |
 | [**printf**](./printf)              |    C     | `variadic arguments`                             |
 | [**graphic**](./graphic)              |    C     | `mlx` `graphic design`                           |
@@ -21,8 +26,3 @@
 | &nbsp; ├ [**CPP07**](./CPP/CPP07)    |    C++   | `templates` `containers` `iterators`            |
 | &nbsp;└ [**CPP08**](./CPP/CPP08)          |    C++   | `STL` `containers` `iterators` `algorithms`     |
 | [**irc-server**](./irc-server)                 |    C++   | `threadpool` `socket` `I/O multiplexing`        |
-
-C with norimenette formatter
-C++ with C++98 and not use namespace
-every module use Makefile to compile
-without external libraries
