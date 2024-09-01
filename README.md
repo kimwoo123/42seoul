@@ -6,7 +6,7 @@ C++ with C++98 and not use namespace
 
 every module use Makefile to compile
 
-without external libraries
+limited use external libraries
 
 | Project                                | Language | Topics                                          |
 | :------------------------------------- | :------: | :-----------------------------------------------|
