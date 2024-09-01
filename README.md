@@ -1,12 +1,12 @@
 ## Common Circle
 
-C with norimenette formatter
+For C projects, we used the Norminette formatter.
 
-C++ with C++98 and not use namespace
+For C++ projects, we adhered to the C++98 standard and did not use namespaces.
 
-every module use Makefile to compile
+Every module was compiled using a Makefile.
 
-limited use external libraries
+The use of external libraries was limited to those explicitly allowed.
 
 | Project                                | Language | Topics                                          |
 | :------------------------------------- | :------: | :-----------------------------------------------|
