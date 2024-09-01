@@ -11,13 +11,18 @@
 | [**pipex**](./IPC)                     |    C     | `pipe` `multi process` `system programming`      |
 | [**minishell**](./bash_shell)          |    C     | `IPC +` `LR parser` `tree structure`             |
 | [**CPP**](./CPP)                       |    C++   | `OOP`                                            |
-| &nbsp;&nbsp;&nbsp;&nbsp; ├─ [**CPP00**](./CPP/CPP00)    |    C++   | `OOP basics` `classes` `objects`                |
-| &nbsp;&nbsp;&nbsp;&nbsp; ├─ [**CPP01**](./CPP/CPP01)    |    C++   | `memory allocation` `references`                |
-| &nbsp;&nbsp;&nbsp;&nbsp; ├─ [**CPP02**](./CPP/CPP02)    |    C++   | `operator overloading` `inheritance`            |
-| &nbsp;&nbsp;&nbsp;&nbsp; ├─ [**CPP03**](./CPP/CPP03)    |    C++   | `polymorphism` `abstract classes`               |
-| &nbsp;&nbsp;&nbsp;&nbsp; ├─ [**CPP04**](./CPP/CPP04)    |    C++   | `templates` `stl`                               |
-| &nbsp;&nbsp;&nbsp;&nbsp; ├─ [**CPP05**](./CPP/CPP05)    |    C++   | `exceptions` `error handling`                   |
-| &nbsp;&nbsp;&nbsp;&nbsp; ├─ [**CPP06**](./CPP/CPP06)    |    C++   | `casts` `conversion`                            |
-| &nbsp;&nbsp;&nbsp;&nbsp; ├─ [**CPP07**](./CPP/CPP07)    |    C++   | `containers` `iterators`                        |
-| &nbsp;&nbsp;&nbsp;&nbsp; └─ [**CPP08**](./CPP/CPP08)    | 
-| [**ft_irc**](./irc-server)             |    C++   | `threadpool` `socket` `I/O multiplexing`         |
+| &nbsp;&nbsp; ├ [**CPP00**](./CPP/CPP00)    |    C++   | `OOP basics` `classes` `objects`                |
+| &nbsp;&nbsp; ├ [**CPP01**](./CPP/CPP01)    |    C++   | `references` `memory allocation`                |
+| &nbsp;&nbsp; ├ [**CPP02**](./CPP/CPP02)    |    C++   | `operator overloading` `orthodox canonical form`|
+| &nbsp;&nbsp; ├ [**CPP03**](./CPP/CPP03)    |    C++   | `inheritance` `multiple inheritance`            |
+| &nbsp;&nbsp; ├ [**CPP04**](./CPP/CPP04)    |    C++   | `abstract classes` `interfaces` `subtype`       |
+| &nbsp;&nbsp; ├ [**CPP05**](./CPP/CPP05)    |    C++   | `exceptions` `error handling`                   |
+| &nbsp;&nbsp; ├ [**CPP06**](./CPP/CPP06)    |    C++   | `casts` `conversion`                            |
+| &nbsp;&nbsp; ├ [**CPP07**](./CPP/CPP07)    |    C++   | `templates` `containers` `iterators`            |
+| &nbsp; └ [**CPP08**](./CPP/CPP08)          |    C++   | `STL` `containers` `iterators` `algorithms`     |
+| [**ft_irc**](./irc-server)                 |    C++   | `threadpool` `socket` `I/O multiplexing`        |
+
+C with norimenette formatter
+C++ with C++98 and not use namespace
+every module use Makefile to compile
+without external libraries
