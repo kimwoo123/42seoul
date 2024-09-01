@@ -1,7 +1,7 @@
 ifeq ($(filter $(MAKECMDGOALS), test), test)
-include ./Makefile_Test
+include ./Makefile_test
 else
-include ./Makefile_Variable
+include ./Makefile_var
 endif
 
 $(NAME) : $(ALL_OBJ)

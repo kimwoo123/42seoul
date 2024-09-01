@@ -4,10 +4,11 @@ CPPFLAGS = -MMD -MP
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 RMFLAGS = -rf
 
-IRC_SRC = Channel.cpp Request.cpp Utils.cpp \
-			   Client.cpp Server.cpp main.cpp \
-			   Command.cpp ThreadPool.cpp log.cpp \
-			   Response.cpp Mutex.cpp
+IRC_SRC = \
+		 		Channel.cpp Request.cpp Utils.cpp \
+				Client.cpp Server.cpp main.cpp \
+				Command.cpp ThreadPool.cpp log.cpp \
+				Response.cpp Mutex.cpp
 
 IRC_DIR = ./source/
 IRC_OBJ_DIR = ./object/
@@ -17,7 +18,8 @@ IRC_SRC_PATH = $(addprefix $(IRC_DIR), $(IRC_SRC))
 IRC_OBJ_PATH = $(addprefix $(IRC_OBJ_DIR), $(IRC_OBJ))
 IRC_DEB_PATH = $(addprefix $(IRC_OBJ_DIR), $(IRC_DEP))
 
-CMD_SRC = PassCommand.cpp PrivmsgCommand.cpp \
+CMD_SRC = \
+		  		PassCommand.cpp PrivmsgCommand.cpp \
 				KickCommand.cpp CapCommand.cpp \
 				ModeCommand.cpp QuitCommand.cpp \
 				NickCommand.cpp TopicCommand.cpp \
