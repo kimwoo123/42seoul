@@ -16,49 +16,33 @@ void	Client::Init(int sock) {
 }
 
 bool	Client::IsAuth(void) const {
-	if (this->auth_flag_ & FT_AUTH)
+	if (this->auth_flag_ & AUTH)
 		return true;
 	return false;
 }
 
 void	Client::SetAuthFlag(const int& flag) {
-	if (flag & FT_AUTH_PASS)
-		this->auth_flag_ |= FT_AUTH_PASS;
-	if (flag & FT_AUTH_NICK)
-		this->auth_flag_ |= FT_AUTH_NICK;
-	if (flag & FT_AUTH_USER)
-		this->auth_flag_ |= FT_AUTH_USER;
-	if (flag & FT_AUTH)
-		this->auth_flag_ |= FT_AUTH;
+	if (flag & AUTH_PASS)
+		this->auth_flag_ |= AUTH_PASS;
+	if (flag & AUTH_NICK)
+		this->auth_flag_ |= AUTH_NICK;
+	if (flag & AUTH_USER)
+		this->auth_flag_ |= AUTH_USER;
+	if (flag & AUTH)
+		this->auth_flag_ |= AUTH;
 }
 
 char	Client::get_auth_flag(const int& flag) const {
 	char	ret = 0;
-	if ((flag & FT_AUTH) && (this->auth_flag_ & FT_AUTH))
-		ret |= FT_AUTH;
-	if ((flag & FT_AUTH_PASS) && (this->auth_flag_ & FT_AUTH_PASS))
-		ret |= FT_AUTH_PASS;
-	if ((flag & FT_AUTH_NICK) && (this->auth_flag_ & FT_AUTH_NICK))
-		ret |= FT_AUTH_NICK;
-	if ((flag & FT_AUTH_USER) && (this->auth_flag_ & FT_AUTH_USER))
-		ret |= FT_AUTH_USER;
+	if ((flag & AUTH) && (this->auth_flag_ & AUTH))
+		ret |= AUTH;
+	if ((flag & AUTH_PASS) && (this->auth_flag_ & AUTH_PASS))
+		ret |= AUTH_PASS;
+	if ((flag & AUTH_NICK) && (this->auth_flag_ & AUTH_NICK))
+		ret |= AUTH_NICK;
+	if ((flag & AUTH_USER) && (this->auth_flag_ & AUTH_USER))
+		ret |= AUTH_USER;
 	return ret;
-}
-
-Client Client::operator = (const Client& client) {
-	if (this == &client)
-		return *this;
-
-	this->auth_flag_ = client.auth_flag_;
-	this->sock_ = client.sock_;
-	this->nick_ = client.nick_;
-	this->user_name_ = client.user_name_;
-	this->host_name_ = client.host_name_;
-	this->server_name_ = client.server_name_;
-	this->real_name_ = client.real_name_;
-	this->address_ = client.address_;
-	this->password_ = client.password_;
-	return *this;
 }
 
 int	Client::set_sock(int fd) {
@@ -77,20 +61,6 @@ void Client::set_nick(const std::string& nick) {
 
 const std::string& Client::get_nick(void) const {
 	return this->nick_;
-}
-
-bool Client::operator < (const Client& client) const {
-	return (this->sock_ < client.sock_);
-}
-
-bool Client::operator > (const Client& client) const {
-	return (this->sock_ > client.sock_);
-}
-
-bool Client::operator == (const Client& client) const {
-	if ((this->nick_).compare(client.nick_) == 0)
-		return true;
-	return false;
 }
 
 const std::vector<std::string>&	Client::get_channels(void) const {

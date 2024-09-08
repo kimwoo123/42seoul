@@ -4,7 +4,7 @@ CapCommand::CapCommand(const std::vector<std::string> &token_list, Server *s, Cl
 }
 
 void	CapCommand::SetInfo(void) {
-	this->client_nick_ = this->server_->SearchClientBySock(this->client_sock_);
+	this->client_nick_ = SearchClientBySock(this->client_sock_);
 }
 
 void	CapCommand::AnyOfError(void) {
@@ -14,7 +14,7 @@ void	CapCommand::AnyOfError(void) {
 		this->is_success_ = true;
 }
 
-void	CapCommand::Run() {
+void	CapCommand::Run(void) {
 	try {
 		AnyOfError();
 		if (this->is_success_ == false)

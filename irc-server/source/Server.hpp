@@ -31,61 +31,26 @@ class Server;
 #include "Utils.hpp"
 #include "Mutex.hpp"
 #include "log.hpp"
+#include "ServerInterface.hpp"
 
-#define FT_SOCK_QUEUE_SIZE 100
-#define FT_KQ_EVENT_SIZE 100
-#define FT_TIMEOUT_SEC 5
-#define FT_TIMEOUT_NSEC 0
-#define FT_BUFF_SIZE 1024
-#define FT_THREAD_POOL_SIZE 10
-# ifndef FT_SERVER_NAME
-#  define FT_SERVER_NAME "Happy"
+#define SOCK_QUEUE_SIZE 100
+#define KQ_EVENT_SIZE 100
+#define TIMEOUT_SEC 5
+#define TIMEOUT_NSEC 0
+#define BUFF_SIZE 1024
+#define THREAD_POOL_SIZE 10
+# ifndef SERVER_NAME
+#  define SERVER_NAME "Happy"
 # endif
 # ifndef IRC_VERSION
 #  define IRC_VERSION "0.1"
 # endif
 
-class Server {
+class Server: public ServerInterface {
 	public:
 		~Server();
 		Server(int argc, char **argv);
 		void		Run(void);
-		ThreadPool	*pool_;
-
-		std::map<std::string, Channel*>& get_channels(void);
-		Channel*	get_channel_ptr(const std::string& name);
-
-		/* for command process */
-		std::string		SearchClientBySock(const int& sock);
-		int		SearchClientByNick(const std::string& nick);
-		bool	SearchChannelByName(const std::string& name);
-		void	AddDeleteClient(const int& sock);
-		void	CreateChannel(const channel_info& info);//allocate Channel
-		bool	AddChannel(Channel *channel);
-		bool	AddClient(Client *client);
-
-		void		CeaseChannel(const std::string& channel_name);//free Channel
-		Channel*	DeleteChannel(const std::string& channel_name);
-		Client*		DeleteClient(const int& sock);
-
-	/* mutex list functions */
-		bool	AddClientMutex(const int& sock);
-		bool	AddChannelMutex(const std::string& name);
-		bool	DeleteClientMutex(const int& sock);
-		bool	DeleteChannelMutex(const std::string& name);
-
-		bool	LockClientMutex(const int& sock);
-		bool	LockChannelMutex(const std::string& name);
-		void	UnlockClientMutex(const int& sock);
-		void	UnlockChannelMutex(const std::string& name);
-
-		bool	LockClientListMutex(void);
-		void	UnlockClientListMutex(void);
-		bool	LockChannelListMutex(void);
-		void	UnlockChannelListMutex(void);
-
-	/* Authentication */
-		bool	AuthPassword(const std::string& password);
 
 	/* private member functions*/
 	private:
@@ -107,6 +72,41 @@ class Server {
 		void	DisconnectClient(const int& sock);//free Client
 		void	DeleteClientInChannel(const int& sock, Client *client);
 		void	DeleteClientEvent(const int& sock);
+		void	ReadSocket(Client *client);
+
+		/* mutex list functions */
+		bool	AddClientMutex(const int& sock);
+		bool	DeleteClientMutex(const int& sock);
+		bool	LockClientMutex(const int& sock);
+		void	UnlockClientMutex(const int& sock);
+		bool	LockClientListMutex(void);
+		void	UnlockClientListMutex(void);
+
+		bool	AddChannelMutex(const std::string& name);
+		bool	DeleteChannelMutex(const std::string& name);
+		bool	LockChannelMutex(const std::string& name);
+		void	UnlockChannelMutex(const std::string& name);
+		bool	LockChannelListMutex(void);
+		void	UnlockChannelListMutex(void);
+
+		/* for command process */
+		std::string		SearchClientBySock(const int& sock);
+		int		SearchClientByNick(const std::string& nick);
+		bool	SearchChannelByName(const std::string& name);
+		void	AddDeleteClient(const int& sock);
+		void	CreateChannel(const channel_info& info);//allocate Channel
+		bool	AddChannel(Channel *channel);
+		bool	AddClient(Client *client);
+		
+		/* Authentication */
+		bool	AuthPassword(const std::string& password);
+
+		void	CeaseChannel(const std::string& channel_name);//free Channel
+		Channel	*DeleteChannel(const std::string& channel_name);
+		Client	*DeleteClient(const int& sock);
+
+		std::map<std::string, Channel*>& get_channels(void);
+		Channel	*get_channel_ptr(const std::string& name);
 
 		void			ConnectClient(void);//allocation Client
 		ClientNetInfo	AcceptClient(void);
@@ -123,7 +123,7 @@ class Server {
 			itr++;
 		}
 	}
-
+		
 	/* private member variables */
 	private:
 		int	kq_;
@@ -136,8 +136,10 @@ class Server {
 		struct timespec		timeout_;
 		struct sockaddr_in	addr_;
 		struct sigaction	act;
-		struct kevent	evlist_[FT_KQ_EVENT_SIZE];
-
+		struct kevent	evlist_[KQ_EVENT_SIZE];
+		
+		ThreadPool	*pool_;
+		
 		std::map<int, std::string>		buffers_;
 
 		std::map<int, Client*>			clients_;//일단, socket fd 를 key로 지정
@@ -155,6 +157,7 @@ class Server {
 		std::map<std::string, Mutex*>	channel_mutex_list_;
 
 		friend class	Command;
+		friend class	TestCommand;
 };
 
 #endif

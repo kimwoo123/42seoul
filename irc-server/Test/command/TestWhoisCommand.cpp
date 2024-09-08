@@ -16,7 +16,7 @@ void	TestWhoisCommand::RunTest(void) {
 	this->token_list_.push_back("WHOIS");
 	WhoisCommand com(this->token_list_, this->dummy_server_, this->dummy_client_);
 	IsEqual("451 :You have not registered", RunAndReturnRespInTest(&com));
-	this->dummy_client_->SetAuthFlag(FT_AUTH);
+	this->dummy_client_->SetAuthFlag(AUTH);
 	IsEqual("431 :No nickname given", RunAndReturnRespInTest(&com));
 
 	this->token_list_.push_back("dummy_client");
@@ -26,12 +26,12 @@ void	TestWhoisCommand::RunTest(void) {
 	this->token_list_.clear();
 	this->token_list_.push_back("WHOIS");
 	this->token_list_.push_back(this->dummy_client_->get_nick());
-	this->dummy_server_->AddClient(this->dummy_client_);
+	AddClient(this->dummy_client_);
 	WhoisCommand com3(this->token_list_, this->dummy_server_, this->dummy_client_);
 	IsEqual("318 WHOISEND", RunAndReturnRespInTest(&com3));
 }
 
 void	TestWhoisCommand::TearDown(void) {
-	this->dummy_server_->DeleteClient(this->dummy_client_->get_sock());
+	DeleteClient(this->dummy_client_->get_sock());
 	this->dummy_client_->UnsetAuthFlagInTest();
 }

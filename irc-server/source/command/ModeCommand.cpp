@@ -49,8 +49,8 @@ void	ModeCommand::ModifyChannel(Channel *c, char mode, bool sign, int *param_ind
 				c->set_mode(MODE_INVITE, true);
 				break ;
 			case 'o': {
-				int user = this->server_->SearchClientByNick(this->params_[(*param_index)++]);
-				if (user == FT_INIT_CLIENT_FD)
+				int user = SearchClientByNick(this->params_[(*param_index)++]);
+				if (user == INIT_CLIENT_FD)
 					return ;
 				c->Mode(user, '@');
 				break ;
@@ -77,8 +77,8 @@ void	ModeCommand::ModifyChannel(Channel *c, char mode, bool sign, int *param_ind
 				c->set_mode(MODE_INVITE, false);
 				break ;
 			case 'o': {
-				int user = this->server_->SearchClientByNick(this->params_[(*param_index)++]);
-				if (user == FT_INIT_CLIENT_FD)
+				int user = SearchClientByNick(this->params_[(*param_index)++]);
+				if (user == INIT_CLIENT_FD)
 					return ;
 				c->Mode(user, ' ');
 				break ;
@@ -114,17 +114,17 @@ void	ModeCommand::CheckChannel(const std::string& channel_name) {
 	std::map<std::string, Channel*> *channel_list;
 	std::map<std::string, Channel*>::iterator chan;
 
-	this->server_->LockChannelListMutex();
-	channel_list = &(this->server_->get_channels());
+	LockChannelListMutex();
+	channel_list = &(get_channels());
 	chan = channel_list->find(channel_name);
 	if (chan == channel_list->end()) {
-		this->server_->UnlockChannelListMutex();
+		UnlockChannelListMutex();
 		this->resp_ = (std::string)ERR_NOSUCHCHANNEL + " " + channel_name + " :No such channel";
 		return ;
 	}
-	this->server_->UnlockChannelListMutex();
+	UnlockChannelListMutex();
 
-	this->server_->LockChannelMutex(chan->first);
+	LockChannelMutex(chan->first);
 	if ((chan->second)->IsMember(this->client_sock_) == false)
 		this->resp_ = (std::string)ERR_NOTONCHANNEL + " " + channel_name + " :You're not on that channel";
 	else if ((chan->second)->IsOperator(this->client_sock_) == false)
@@ -133,7 +133,7 @@ void	ModeCommand::CheckChannel(const std::string& channel_name) {
 		this->is_success_ = true;
 		SetModeInChannel(chan->second, this->params_[1]);
 	}
-	this->server_->UnlockChannelMutex(chan->first);
+	UnlockChannelMutex(chan->first);
 }
 
 size_t	ModeCommand::CheckParamCount(const std::string& modestr) {
@@ -150,7 +150,7 @@ size_t	ModeCommand::CheckParamCount(const std::string& modestr) {
 				++count;
 		}
 		else if (sign == false) {
-			if (modestr[i] == 'o')
+			if (modestr[i] == 'o' || modestr[i] == 'k')
 				++count;
 		}
 	}
@@ -174,13 +174,13 @@ void	ModeCommand::AnyOfError(void) {
 		CheckChannel(this->params_[0]);
 }
 
-void	ModeCommand::Run() {
+void	ModeCommand::Run(void) {
 	try {
 		AnyOfError();
 		if (this->is_success_ == false)
 			SendResponse(this->client_sock_, this->resp_.get_format_str());
 		else {
-			std::string	sender = this->server_->SearchClientBySock(this->client_sock_);
+			std::string	sender = SearchClientBySock(this->client_sock_);
 			// :sender MODE param param?
 			this->resp_ = (std::string)":" + sender + " MODE";
 			for (size_t i = 0; i < this->params_.size(); ++i) {

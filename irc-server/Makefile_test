@@ -4,11 +4,10 @@ CPPFLAGS = -MMD -MP
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 RMFLAGS = -rf
 
-IRC_SRC = \
-		  		Channel.cpp Request.cpp Utils.cpp \
-				Client.cpp Server.cpp Mutex.cpp \
-				Command.cpp ThreadPool.cpp log.cpp \
-				Response.cpp
+IRC_SRC = Channel.cpp Request.cpp Utils.cpp \
+			   Client.cpp Server.cpp Mutex.cpp \
+			   Command.cpp ThreadPool.cpp log.cpp \
+			   Response.cpp
 
 IRC_DIR = ./source/
 IRC_OBJ_DIR = ./object/
@@ -18,8 +17,7 @@ IRC_SRC_PATH = $(addprefix $(IRC_DIR), $(IRC_SRC))
 IRC_OBJ_PATH = $(addprefix $(IRC_OBJ_DIR), $(IRC_OBJ))
 IRC_DEB_PATH = $(addprefix $(IRC_OBJ_DIR), $(IRC_DEP))
 
-CMD_SRC = \
-		  		PassCommand.cpp PrivmsgCommand.cpp \
+CMD_SRC = PassCommand.cpp PrivmsgCommand.cpp \
 				KickCommand.cpp CapCommand.cpp \
 				ModeCommand.cpp QuitCommand.cpp \
 				NickCommand.cpp TopicCommand.cpp \
@@ -36,8 +34,7 @@ CMD_SRC_PATH = $(addprefix $(CMD_DIR), $(CMD_SRC))
 CMD_OBJ_PATH = $(addprefix $(CMD_OBJ_DIR), $(CMD_OBJ))
 CMD_DEB_PATH = $(addprefix $(CMD_OBJ_DIR), $(CMD_DEP))
 
-TEST_SRC = \
-		   TestRequest.cpp TestResponse.cpp \
+TEST_SRC = TestRequest.cpp TestResponse.cpp TestChannel.cpp \
 		   TestCommand.cpp TestUtils.cpp main.cpp
 
 TEST_DIR = ./Test/
@@ -48,15 +45,14 @@ TEST_SRC_PATH = $(addprefix $(TEST_DIR), $(TEST_SRC))
 TEST_OBJ_PATH = $(addprefix $(TEST_OBJ_DIR), $(TEST_OBJ))
 TEST_DEB_PATH = $(addprefix $(TEST_OBJ_DIR), $(TEST_DEP))
 
-TEST_CMD = \
-		   TestCapCommand.cpp TestInviteCommand.cpp \
+TEST_CMD = TestCapCommand.cpp TestInviteCommand.cpp \
 		   TestJoinCommand.cpp TestKickCommand.cpp \
 		   TestModeCommand.cpp TestNickCommand.cpp \
 		   TestPartCommand.cpp TestPassCommand.cpp \
 		   TestPingCommand.cpp TestPrivmsgCommand.cpp \
 		   TestQuitCommand.cpp TestTopicCommand.cpp \
 		   TestUnvalidCommand.cpp TestUserCommand.cpp \
-		   TestWhoisCommand.cpp
+		   TestWhoisCommand.cpp \
 
 
 TEST_CMD_DIR = ./Test/command/
@@ -68,10 +64,10 @@ TEST_CMD_OBJ_PATH = $(addprefix $(TEST_CMD_OBJ_DIR), $(TEST_CMD_OBJ))
 TEST_CMD_DEB_PATH = $(addprefix $(TEST_CMD_OBJ_DIR), $(TEST_CMD_DEP))
 
 $(TEST_CMD_OBJ_DIR)%.o : $(TEST_CMD_DIR)%.cpp
-	$(CXX) $(CXXFALGS) $(CPPFLAGS) -c $< -o $@ -I$(IRC_DIR) -I$(TEST_DIR) -I$(TEST_CMD_DIR) -I$(CMD_DIR)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@ -I$(IRC_DIR) -I$(TEST_DIR) -I$(TEST_CMD_DIR) -I$(CMD_DIR)
 
 $(TEST_OBJ_DIR)%.o : $(TEST_DIR)%.cpp
-	$(CXX) $(CXXFALGS) $(CPPFLAGS) -c $< -o $@ -I$(IRC_DIR) -I$(CMD_DIR) -I$(TEST_DIR) -I$(TEST_CMD_DIR)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@ -I$(IRC_DIR) -I$(CMD_DIR) -I$(TEST_DIR) -I$(TEST_CMD_DIR)
 
 $(IRC_OBJ_DIR)%.o : $(IRC_DIR)%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@ -I$(IRC_DIR) -I$(CMD_DIR) -I$(TEST_DIR) -I$(TEST_CMD_DIR)

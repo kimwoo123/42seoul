@@ -11,11 +11,12 @@ class KickCommand: public Command {
 		void	CheckChannel(const std::string& channel_name, const std::string& nick);
 		bool	SetInfo(void);
 		void	NoticeKick(const std::map<int, char>& chan_member_list);
+		void	Kick(Channel *chan);
 
 		std::string	target_nick_;
 		std::string	channel_name_;
 		std::string	sender_;
-		int	target_;
+		int			target_;
 
 		friend class	Request;
 		friend class	TestKickCommand;
