@@ -28,4 +28,4 @@ The use of external libraries was limited to those explicitly allowed.
 | &nbsp; ├ [**CPP06**](./CPP/CPP06)      |    C++   | `casts` `conversion`                            |
 | &nbsp; ├ [**CPP07**](./CPP/CPP07)      |    C++   | `templates` `containers` `iterators`            |
 | &nbsp;└ [**CPP08**](./CPP/CPP08)       |    C++   | `STL` `containers` `iterators` `algorithms`     |
-| [**irc-server**](./irc-server)         |    C++   | `threadpool` `socket` `I/O multiplexing`        |
+| [**irc-server**](./irc-server)         |    C++   | `threadpool` `socket` `I/O multiplexing` `design pattern`      |
