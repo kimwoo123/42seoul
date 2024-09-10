@@ -16,7 +16,7 @@ The use of external libraries was limited to those explicitly allowed.
 | [**graphic**](./graphic)               |    C     | `mlx` `graphic design`                          |
 | [**garphic-3d**](./graphic-3d)         |    C     | `raycasting` `mlx` `graphic design`             |
 | [**philosophers**](./philosophers)     |    C     | `pthread` `mutex` `multi thread`                |
-| [**IPC**](./IPC)                       |    C     | `pipe` `multi process` `system programming`     |
+| [**IPC**](./IPC)                       |    C     | `pipe` `multi process` `sinal handling`         |
 | [**bash-shell**](./bash-shell)         |    C     | `IPC +` `LR parser` `tree structure`            |
 | [**CPP**](./CPP)                       |    C++   | `OOP`                                           |
 | &nbsp; ├ [**CPP00**](./CPP/CPP00)      |    C++   | `OOP basics` `classes` `objects`                |
@@ -27,5 +27,6 @@ The use of external libraries was limited to those explicitly allowed.
 | &nbsp; ├ [**CPP05**](./CPP/CPP05)      |    C++   | `exceptions` `error handling`                   |
 | &nbsp; ├ [**CPP06**](./CPP/CPP06)      |    C++   | `casts` `conversion`                            |
 | &nbsp; ├ [**CPP07**](./CPP/CPP07)      |    C++   | `templates` `containers` `iterators`            |
-| &nbsp;└ [**CPP08**](./CPP/CPP08)       |    C++   | `STL` `containers` `iterators` `algorithms`     |
+| &nbsp; ├ [**CPP08**](./CPP/CPP08)      |    C++   | `STL` `containers` `iterators` `algorithms`     |
+| &nbsp;└ [**CPP09**](./CPP/CPP09)       |    C++   | `STL` `containers` `iterators` `algorithms`     |
 | [**irc-server**](./irc-server)         |    C++   | `threadpool` `socket` `I/O multiplexing` `design pattern`      |
