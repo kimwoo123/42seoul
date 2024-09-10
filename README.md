@@ -2,7 +2,7 @@
 
 For C projects, we used the Norminette formatter.
 
-For C++ projects, we adhered to the C++98 standard and did not use namespaces.
+For C++ projects, we adhered to the C++98 standard and did not use 'namespace' keyword.
 
 Every module was compiled using a Makefile.
 
